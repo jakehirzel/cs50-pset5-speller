@@ -8,7 +8,10 @@
  */
 
 #include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 #include <stdbool.h>
+#include <ctype.h>
 
 #include "dictionary.h"
 
@@ -43,17 +46,55 @@ bool load(const char* dictionary)
     }
     else
     {
-        // declare root instance of the struct
-        // dictionary_node* root;
+        // create empty root instance of the struct, error check
+        dictionary_node* root = malloc(sizeof(dictionary_node));
+        if (root == NULL)
+        {
+            printf("Out of memory.\n");
+            return 99;
+        }
+        else
+        {
+            root->is_word = false;
+            root->children[27] = {0};
+        }
         
-        // declare a temp variable to hold each word
+        // declare a temp variable to hold each word and each letter of each
         char dictionary_word[46] = {0};
+        int index = 0;
         
         // loop through the dictionary
         while (fscanf(dictionary_ptr, "%s", dictionary_word) != EOF)
         {
-            // TEST print the word
-            printf("%s\n", dictionary_word);
+            // create a temporary crawler and assign root to crawler
+            dictionary_node* crawler;
+            crawler = root;
+            
+            // loop through letters in each word
+            for (int i = 0; i < strlen(dictionary_word); i++)
+            {
+                // change case, get numerical value of letter, assign to index
+                index = tolower(dictionary_word[i]) - 'a';
+                
+                // traverse if there's an appropriate pointer
+                while (crawler->children[index] != 0)
+                {
+                    crawler = crawler->children[index];
+                }
+                
+                // otherwise made a new node
+                crawler->children[index] = malloc(sizeof(dictionary_node));
+                if (crawler->children[index] == NULL)
+                {
+                    printf("Out of memory.\n");
+                    return 99;
+                }
+                else
+                {
+                    crawler->is_word = false;
+                    crawler->children[27] = {0};
+                }
+            }
         }
     }
     return true;
