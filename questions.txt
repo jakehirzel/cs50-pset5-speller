@@ -1,4 +1,5 @@
-0.  TODO
+0.  According to Wikipedia, it is a lung disease and also the longest word in the English language. In the context of this pset, it is the basis for the 45 character word limit.
+
 1.  TODO
 2.  TODO
 3.  TODO
