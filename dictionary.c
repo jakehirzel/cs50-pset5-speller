@@ -23,6 +23,25 @@ typedef struct dictionary_node
     struct dictionary_node* children[27]; // pointer to child node array
 } dictionary_node;
 
+// put one zeroed out node on the stack for initialization
+dictionary_node zero_node = {0};
+
+// define function to malloc and initialize new node to 0 and return a pointer
+dictionary_node* new_node()
+{
+    dictionary_node* new_node = malloc(sizeof(dictionary_node));
+    if (new_node == NULL)
+    {
+        printf("Out of memory.\n");
+        return 0;
+    }
+    else
+    {
+        *new_node = zero_node;
+        return new_node;
+    }
+}
+
 
 /**
  * Returns true if word is in dictionary else false.
@@ -47,18 +66,9 @@ bool load(const char* dictionary)
     else
     {
         // create empty root instance of the struct, error check
-        dictionary_node* root = malloc(sizeof(dictionary_node));
-        if (root == NULL)
-        {
-            printf("Out of memory.\n");
-            return 99;
-        }
-        else
-        {
-            root->is_word = false;
-            root->children[27] = {0};
-        }
-        
+        dictionary_node* root;
+        root = new_node();
+
         // declare a temp variable to hold each word and each letter of each
         char dictionary_word[46] = {0};
         int index = 0;
@@ -82,18 +92,8 @@ bool load(const char* dictionary)
                     crawler = crawler->children[index];
                 }
                 
-                // otherwise made a new node
-                crawler->children[index] = malloc(sizeof(dictionary_node));
-                if (crawler->children[index] == NULL)
-                {
-                    printf("Out of memory.\n");
-                    return 99;
-                }
-                else
-                {
-                    crawler->is_word = false;
-                    crawler->children[27] = {0};
-                }
+                // otherwise make a new node
+                crawler->children[index] = new_node();
             }
         }
     }
