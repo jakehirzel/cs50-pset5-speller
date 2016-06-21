@@ -90,12 +90,23 @@ bool load(const char* dictionary)
                 while (crawler->children[index] != 0)
                 {
                     crawler = crawler->children[index];
+                    
+                    // TODO: add if to turn on is_word at last character
                 }
                 
                 // otherwise make a new node
                 crawler->children[index] = new_node();
+                
+                // if it's the last character, set is_word to true
+                if (index == strlen(dictionary_word) - 1)
+                {
+                    crawler->is_word = true;
+                }
             }
         }
+        
+        // TEST: print two words in small dictionary by traversing the trie
+        
     }
     return true;
 }
