@@ -81,8 +81,15 @@ bool check(const char* word)
     // loop through the letters in word
     for (int i = 0; i < strlen(word); i++)
     {
-        // change case, get numerical value of letter, assign to index
-        index = tolower(word[i]) - 'a';
+        // convert letters to index 0 - 25, apostrophes to 26
+        if ((int)word[i] == 39)
+        {
+            index = 26;
+        }
+        else
+        {
+            index = tolower(word[i]) - 'a';
+        }
 
         // if there's a pointer traverse
         if (crawler->children[index] != NULL)
@@ -143,8 +150,15 @@ bool load(const char* dictionary)
             // loop through letters in each word
             for (int i = 0; i < strlen(dictionary_word); i++)
             {
-                // change case, get numerical value of letter, assign to index
-                index = tolower(dictionary_word[i]) - 'a';
+                // convert letters to index 0 - 25, apostrophes to 26
+                if ((int)dictionary_word[i] == 39)
+                {
+                    index = 26;
+                }
+                else
+                {
+                    index = tolower(dictionary_word[i]) - 'a';
+                }
                 
                 // if there's a pointer, traverse
                 if (crawler->children[index] != 0)
