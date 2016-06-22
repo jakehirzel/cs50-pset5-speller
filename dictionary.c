@@ -29,6 +29,9 @@ dictionary_node zero_node = {0};
 // declare root instance of the struct
 dictionary_node* root;
 
+// declare word counter
+int word_counter = 0;
+
 // define function to malloc and initialize new node to 0 and return a pointer
 int malloc_count = 0;
 dictionary_node* new_node()
@@ -68,7 +71,45 @@ void free_node(dictionary_node* free_me)
  */
 bool check(const char* word)
 {
-    // TODO
+    // create temp variable to hold numerical letter value of word
+    int index = 0;
+    
+    // create temporary crawler and assign root as value
+    dictionary_node* crawler;
+    crawler = root;
+    
+    // loop through the letters in word
+    for (int i = 0; i < strlen(word); i++)
+    {
+        // change case, get numerical value of letter, assign to index
+        index = tolower(word[i]) - 'a';
+
+        // if there's a pointer traverse
+        if (crawler->children[index] != NULL)
+        {
+            crawler = crawler->children[index];
+            
+            // if last letter, check is_word is true
+            if (i == strlen(word) - 1)
+            {
+                if(crawler->is_word == true)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+        }
+        
+        // else (i.e. pointer NULL)
+        else
+        {
+            return false;
+        }
+    }
+    // if all fails
     return false;
 }
 
@@ -114,6 +155,7 @@ bool load(const char* dictionary)
                     if (i == strlen(dictionary_word) - 1)
                     {
                         crawler->is_word = true;
+                        word_counter++;
                     }
                     
                 }
@@ -128,6 +170,7 @@ bool load(const char* dictionary)
                     if (i == strlen(dictionary_word) - 1)
                     {
                         crawler->is_word = true;
+                        word_counter++;
                     }
                 }
             }
@@ -268,8 +311,7 @@ bool load(const char* dictionary)
  */
 unsigned int size(void)
 {
-    // TODO
-    return 0;
+    return word_counter;
 }
 
 /**
