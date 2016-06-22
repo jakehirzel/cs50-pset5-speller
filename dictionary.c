@@ -27,6 +27,7 @@ typedef struct dictionary_node
 dictionary_node zero_node = {0};
 
 // define function to malloc and initialize new node to 0 and return a pointer
+int malloc_count = 0;
 dictionary_node* new_node()
 {
     dictionary_node* new_node = malloc(sizeof(dictionary_node));
@@ -38,6 +39,7 @@ dictionary_node* new_node()
     else
     {
         *new_node = zero_node;
+        malloc_count++;
         return new_node;
     }
 }
@@ -252,5 +254,8 @@ unsigned int size(void)
 bool unload(void)
 {
     // TODO
+    
+    // free malloc'd memory!!
+    
     return false;
 }
