@@ -1,12 +1,21 @@
 0.  According to Wikipedia, it is a lung disease and also the longest word in the English language. In the context of this pset, it is the basis for the 45 character word limit.
 
-1.  TODO
-2.  TODO
-3.  TODO
+1.  getrusage provides measures of resrouce usage across several metrics.
+
+2.  There are 16 members in a struct rusage.
+
+3.  Since time is of the essence here, it's speedier to use the reference instead of having calculate make copies of the values.
+
 4.  TODO
-5.  TODO
-6.  TODO
+
+5.  fgetc allows for dealing with special cases like apostrophes and words with numbers, which would not be possible with fscanf.
+
+6.  They are declared as const so that there is no chance that the values represented by those pointers could be altered by the function.
+
 7.  TODO
-8.  TODO
+
+8.  check and size were quick from the start (0.01 and .0.00 respectively), but load and unload had issues (load between 0.10 and 0.15 and unload steady around 0.07).
+
 9.  TODO
+
 10. TODO

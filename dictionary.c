@@ -23,9 +23,6 @@ typedef struct dictionary_node
     struct dictionary_node* children[27]; // pointer to child node array
 } dictionary_node;
 
-// put one zeroed out node on the stack for initialization
-dictionary_node zero_node = {0};
-
 // declare root instance of the struct
 dictionary_node* root;
 
@@ -35,7 +32,7 @@ int word_counter = 0;
 // define function to malloc and initialize new node to 0 and return a pointer
 dictionary_node* new_node()
 {
-    dictionary_node* new_node = malloc(sizeof(dictionary_node));
+    dictionary_node* new_node = calloc(1, sizeof(dictionary_node));
     if (new_node == NULL)
     {
         printf("Out of memory.\n");
@@ -43,7 +40,6 @@ dictionary_node* new_node()
     }
     else
     {
-        *new_node = zero_node;
         return new_node;
     }
 }
@@ -133,8 +129,8 @@ bool load(const char* dictionary)
         root = new_node();
 
         // declare a temp variable to hold each word and each letter of each
-        char dictionary_word[46] = {0};
-        int index = 0;
+        char dictionary_word[LENGTH + 1];
+        int index;
         
         // loop through the dictionary
         while (fscanf(dictionary_ptr, "%s", dictionary_word) != EOF)
