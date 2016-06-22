@@ -65,7 +65,7 @@ bool load(const char* dictionary)
     }
     else
     {
-        // create empty root instance of the struct, error check
+        // create empty root instance of the struct
         dictionary_node* root;
         root = new_node();
 
@@ -86,29 +86,30 @@ bool load(const char* dictionary)
                 // change case, get numerical value of letter, assign to index
                 index = tolower(dictionary_word[i]) - 'a';
                 
-                // if this isn't the last letter
-                
-                    // if there's a pointer, traverse
-                    
-                        // if last letter, set is_word
-                
-                    // else make a new node and traverse
-                    
-                        // if last letter, set is_word
-                    
-                // traverse if there's an appropriate pointer
-                while (crawler->children[index] != 0)
+                // if there's a pointer, traverse
+                if (crawler->children[index] != 0)
                 {
                     crawler = crawler->children[index];
+                    
+                    // if last letter, set is_word
+                    if (i == strlen(dictionary_word) - 1)
+                    {
+                        crawler->is_word = true;
+                    }
+                    
                 }
-                
-                // otherwise make a new node
-                crawler->children[index] = new_node();
-                
-                // if it's the last character, set is_word to true
-                if (index == strlen(dictionary_word) - 1)
+            
+                // else make a new node and traverse
+                else
                 {
-                    crawler->is_word = true;
+                    crawler->children[index] = new_node();
+                    crawler = crawler->children[index];
+                    
+                    // if last letter, set is_word
+                    if (i == strlen(dictionary_word) - 1)
+                    {
+                        crawler->is_word = true;
+                    }
                 }
             }
         }
@@ -142,8 +143,96 @@ bool load(const char* dictionary)
         printf("24: %p\n", root->children[24]);
         printf("25: %p\n", root->children[25]);
         printf("26: %p\n", root->children[26]);
-        printf("is_word: %i\n", root->children[0]->is_word);
-        printf("0: %p\n", root->children[0]->children[0]);
+        
+        printf("is_word: %i\n", root->children[2]->is_word);
+        printf("0: %p\n", root->children[2]->children[0]);
+        printf("1: %p\n", root->children[2]->children[1]);
+        printf("2: %p\n", root->children[2]->children[2]);
+        printf("3: %p\n", root->children[2]->children[3]);
+        printf("4: %p\n", root->children[2]->children[4]);
+        printf("5: %p\n", root->children[2]->children[5]);
+        printf("6: %p\n", root->children[2]->children[6]);
+        printf("7: %p\n", root->children[2]->children[7]);
+        printf("8: %p\n", root->children[2]->children[8]);
+        printf("9: %p\n", root->children[2]->children[9]);
+        printf("10: %p\n", root->children[2]->children[10]);
+        printf("11: %p\n", root->children[2]->children[11]);
+        printf("12: %p\n", root->children[2]->children[12]);
+        printf("13: %p\n", root->children[2]->children[13]);
+        printf("14: %p\n", root->children[2]->children[14]);
+        printf("15: %p\n", root->children[2]->children[15]);
+        printf("16: %p\n", root->children[2]->children[16]);
+        printf("17: %p\n", root->children[2]->children[17]);
+        printf("18: %p\n", root->children[2]->children[18]);
+        printf("19: %p\n", root->children[2]->children[19]);
+        printf("20: %p\n", root->children[2]->children[20]);
+        printf("21: %p\n", root->children[2]->children[21]);
+        printf("22: %p\n", root->children[2]->children[22]);
+        printf("23: %p\n", root->children[2]->children[23]);
+        printf("24: %p\n", root->children[2]->children[24]);
+        printf("25: %p\n", root->children[2]->children[25]);
+        printf("26: %p\n", root->children[2]->children[26]);    
+        
+        printf("is_word: %i\n", root->children[2]->children[0]->is_word);
+        printf("0: %p\n", root->children[2]->children[0]->children[0]);
+        printf("1: %p\n", root->children[2]->children[0]->children[1]);
+        printf("2: %p\n", root->children[2]->children[0]->children[2]);
+        printf("3: %p\n", root->children[2]->children[0]->children[3]);
+        printf("4: %p\n", root->children[2]->children[0]->children[4]);
+        printf("5: %p\n", root->children[2]->children[0]->children[5]);
+        printf("6: %p\n", root->children[2]->children[0]->children[6]);
+        printf("7: %p\n", root->children[2]->children[0]->children[7]);
+        printf("8: %p\n", root->children[2]->children[0]->children[8]);
+        printf("9: %p\n", root->children[2]->children[0]->children[9]);
+        printf("10: %p\n", root->children[2]->children[0]->children[10]);
+        printf("11: %p\n", root->children[2]->children[0]->children[11]);
+        printf("12: %p\n", root->children[2]->children[0]->children[12]);
+        printf("13: %p\n", root->children[2]->children[0]->children[13]);
+        printf("14: %p\n", root->children[2]->children[0]->children[14]);
+        printf("15: %p\n", root->children[2]->children[0]->children[15]);
+        printf("16: %p\n", root->children[2]->children[0]->children[16]);
+        printf("17: %p\n", root->children[2]->children[0]->children[17]);
+        printf("18: %p\n", root->children[2]->children[0]->children[18]);
+        printf("19: %p\n", root->children[2]->children[0]->children[19]);
+        printf("20: %p\n", root->children[2]->children[0]->children[20]);
+        printf("21: %p\n", root->children[2]->children[0]->children[21]);
+        printf("22: %p\n", root->children[2]->children[0]->children[22]);
+        printf("23: %p\n", root->children[2]->children[0]->children[23]);
+        printf("24: %p\n", root->children[2]->children[0]->children[24]);
+        printf("25: %p\n", root->children[2]->children[0]->children[25]);
+        printf("26: %p\n", root->children[2]->children[0]->children[26]);    
+
+        printf("is_word: %i\n", root->children[2]->children[0]->children[19]->is_word);
+        printf("0: %p\n", root->children[2]->children[0]->children[19]->children[0]);
+        printf("1: %p\n", root->children[2]->children[0]->children[19]->children[1]);
+        printf("2: %p\n", root->children[2]->children[0]->children[19]->children[2]);
+        printf("3: %p\n", root->children[2]->children[0]->children[19]->children[3]);
+        printf("4: %p\n", root->children[2]->children[0]->children[19]->children[4]);
+        printf("5: %p\n", root->children[2]->children[0]->children[19]->children[5]);
+        printf("6: %p\n", root->children[2]->children[0]->children[19]->children[6]);
+        printf("7: %p\n", root->children[2]->children[0]->children[19]->children[7]);
+        printf("8: %p\n", root->children[2]->children[0]->children[19]->children[8]);
+        printf("9: %p\n", root->children[2]->children[0]->children[19]->children[9]);
+        printf("10: %p\n", root->children[2]->children[0]->children[19]->children[10]);
+        printf("11: %p\n", root->children[2]->children[0]->children[19]->children[11]);
+        printf("12: %p\n", root->children[2]->children[0]->children[19]->children[12]);
+        printf("13: %p\n", root->children[2]->children[0]->children[19]->children[13]);
+        printf("14: %p\n", root->children[2]->children[0]->children[19]->children[14]);
+        printf("15: %p\n", root->children[2]->children[0]->children[19]->children[15]);
+        printf("16: %p\n", root->children[2]->children[0]->children[19]->children[16]);
+        printf("17: %p\n", root->children[2]->children[0]->children[19]->children[17]);
+        printf("18: %p\n", root->children[2]->children[0]->children[19]->children[18]);
+        printf("19: %p\n", root->children[2]->children[0]->children[19]->children[19]);
+        printf("20: %p\n", root->children[2]->children[0]->children[19]->children[20]);
+        printf("21: %p\n", root->children[2]->children[0]->children[19]->children[21]);
+        printf("22: %p\n", root->children[2]->children[0]->children[19]->children[22]);
+        printf("23: %p\n", root->children[2]->children[0]->children[19]->children[23]);
+        printf("24: %p\n", root->children[2]->children[0]->children[19]->children[24]);
+        printf("25: %p\n", root->children[2]->children[0]->children[19]->children[25]);
+        printf("26: %p\n", root->children[2]->children[0]->children[19]->children[26]);
+        
+        printf("is_word: %i\n", root->children[2]->children[0]->children[19]->children[4]->children[17]->children[15]->children[8]->children[11]->children[11]->children[0]->children[17]->is_word);
+
     }
     return true;
 }
