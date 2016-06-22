@@ -26,6 +26,9 @@ typedef struct dictionary_node
 // put one zeroed out node on the stack for initialization
 dictionary_node zero_node = {0};
 
+// declare root instance of the struct
+dictionary_node* root;
+
 // define function to malloc and initialize new node to 0 and return a pointer
 int malloc_count = 0;
 dictionary_node* new_node()
@@ -42,6 +45,21 @@ dictionary_node* new_node()
         malloc_count++;
         return new_node;
     }
+}
+
+// define function to free malloc'd memory from nodes
+int free_count = 0;
+void free_node(dictionary_node* free_me)
+{
+    for (int i = 0; i < 27; i++)
+    {
+        if (free_me->children[i] != NULL)
+        {
+            free_node(free_me->children[i]);
+        }
+    }
+    free(free_me);
+    free_count++;
 }
 
 
@@ -67,8 +85,7 @@ bool load(const char* dictionary)
     }
     else
     {
-        // create empty root instance of the struct
-        dictionary_node* root;
+        // initialize empty root instance of the struct
         root = new_node();
 
         // declare a temp variable to hold each word and each letter of each
@@ -115,6 +132,9 @@ bool load(const char* dictionary)
                 }
             }
         }
+        
+        // TEST: print malloc_count
+        printf("malloc'd: %i\n\n", malloc_count);
         
         // TEST: print cat and caterpillar from the trie
         printf("is_word: %i\n", root->is_word);
@@ -236,6 +256,10 @@ bool load(const char* dictionary)
         printf("is_word: %i\n", root->children[2]->children[0]->children[19]->children[4]->children[17]->children[15]->children[8]->children[11]->children[11]->children[0]->children[17]->is_word);
 
     }
+    
+    // close dictionary file
+    fclose(dictionary_ptr);
+    
     return true;
 }
 
@@ -253,9 +277,11 @@ unsigned int size(void)
  */
 bool unload(void)
 {
-    // TODO
+    // free malloc'd memory
+    free_node(root);
     
-    // free malloc'd memory!!
-    
-    return false;
+    // TEST: print free_count
+    printf("freed: %i\n\n", free_count);
+
+    return true;
 }
