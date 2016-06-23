@@ -143,7 +143,7 @@ bool load(const char* dictionary)
             for (int i = 0; i < strlen(dictionary_word); i++)
             {
                 // convert letters to index 0 - 25, apostrophes to 26
-                if ((int)dictionary_word[i] == 39)
+                if (dictionary_word[i] == 39)
                 {
                     index = 26;
                 }
