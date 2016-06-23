@@ -6,16 +6,21 @@
 
 3.  Since time is of the essence here, it's speedier to use the reference instead of having calculate make copies of the values.
 
-4.  TODO
+4.  In speller.c, main reads words from a file by loading each word, character by character using fgetc(), into a character array called word. It will only load the character into a word if it isalpha() or is a single quotation mark that is not at the start of a word (i.e. an apostrophe and not a quotation mark). If a character within a word is a number or if the word exceeds the maximum LENGTH defined, main will iterate through the rest of that word and reset the word index to 0, effectively skipping it. If fgetc makes it through a series of characters and hits anything other than a letter or number (and without exceeding LENGTH), the program assumes that it has found a complete word, and the word is passed on for further processing.
 
 5.  fgetc allows for dealing with special cases like apostrophes and words with numbers, which would not be possible with fscanf.
 
 6.  They are declared as const so that there is no chance that the values represented by those pointers could be altered by the function.
 
-7.  TODO
+7.  I used a trie data structure to implement load() and check(). I created a struct called dictionary_node that contained an array of 27 pointers, corresponding to each letter of the alphabet plus one additional on the end to handle apostrophes, and a bool called is_word, which would flag whether the dictionary_node represented the end of a word in the dictionary. Letters were mapped to the various arrays by converting all letters tolower() and subtracting the ASCII value of 'a' so that a=0, b=1, c=2... 
 
 8.  check and size were quick from the start (0.01 and .0.00 respectively), but load and unload had issues (load between 0.10 and 0.15 and unload steady around 0.07).
 
-9.  TODO
+9.  I struggled with this. The load() function is my problem point. I swapped calloc() for malloc() in my new_node() function, which allowed me to get rid of some unecessary 0 initilization code. While I think it's better code, it did not affect performance in any perceptable way. I attempted (unsuccessfully) to run my for loops counting down to zero, but ultimately I was not able to make that improve performance, and it was not pretty code, so I reverted to a standard loop structure. Otherwise, I was not able to find information (that I could understand, anyway) on the internet with regard to optimizing loading of a trie.
 
-10. TODO
+10. I think that the issue with my code stems from how often calloc() has to be called. I read some articles on the internet about bulk allocating memory rather than doing it with every node creation. I think there is some merit there, but I am not really sure how to implement technically. I also think it would require a rather major overhaul to the code and the logic of the code, so it would really be more of a do-over than an optimization.
+
+
+
+
+
